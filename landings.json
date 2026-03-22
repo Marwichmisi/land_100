@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "updated": "2026-03-22",
+  "repo": "https://github.com/Marwichmisi/land_100",
+  "baseUrl": "100",
+  "landings": [
+    {
+      "id": 1,
+      "name": "MeowSocks",
+      "desc": "Boutique de chaussettes pour chat - playful, fun, animations",
+      "category": "animations",
+      "level": 3,
+      "folder": "01-meowsocks",
+      "thumbnail": "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=1200&q=80",
+      "url": "",
+      "tags": ["playful", "ecommerce", "animations", "fun", "cats"],
+      "tech": ["HTML", "CSS", "CSS Animations"],
+      "author": "Marwichmisi",
+      "date": "2026-03-22"
+    }
+  ]
+}
