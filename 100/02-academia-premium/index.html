@@ -331,7 +331,27 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
       transition: transform 220ms ease, background-color 220ms ease, border-width 220ms ease, color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      top: -30%;
+      left: -22%;
+      width: 38%;
+      height: 160%;
+      transform: translateX(-180%) rotate(14deg);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0));
+      transition: transform 520ms ease;
+      pointer-events: none;
+    }
+
+    .btn:hover::after,
+    .btn:focus-visible::after {
+      transform: translateX(420%) rotate(14deg);
     }
 
     .btn-primary {
@@ -535,6 +555,14 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow-soft);
       padding: 24px;
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .method-card:hover,
+    .method-card:focus-within {
+      transform: translateY(-5px);
+      border-color: rgba(198, 168, 124, 0.72);
+      box-shadow: 0 14px 36px rgba(10, 17, 40, 0.11);
     }
 
     .method-left .method-card {
@@ -610,6 +638,8 @@
     }
 
     .sanctum-board {
+      --board-topbar: 34px;
+      position: relative;
       background: #0E1730;
       border: 1px solid var(--color-primary);
       border-radius: var(--radius);
@@ -642,7 +672,7 @@
     .panel-left {
       background: rgba(255, 255, 255, 0.03);
       border-right: 1px solid rgba(198, 168, 124, 0.4);
-      padding: 18px;
+      padding: calc(16px + var(--board-topbar)) 18px 18px;
       display: grid;
       gap: 12px;
       align-content: start;
@@ -654,15 +684,20 @@
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.07em;
-      color: rgba(255, 255, 255, 0.74);
+      color: rgba(255, 255, 255, 0.9);
       background: rgba(198, 168, 124, 0.08);
     }
 
     .panel-main {
-      padding: 20px;
+      padding: calc(16px + var(--board-topbar)) 20px 20px;
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      grid-template-rows: 220px 180px;
+      grid-template-areas:
+        "chart column"
+        "card card";
       gap: 14px;
+      align-items: stretch;
     }
 
     .mock-chart,
@@ -676,18 +711,18 @@
     }
 
     .mock-chart {
-      min-height: 220px;
-      grid-column: 1;
+      min-height: 0;
+      grid-area: chart;
     }
 
     .mock-column {
-      min-height: 220px;
-      grid-column: 2;
+      min-height: 0;
+      grid-area: column;
     }
 
     .mock-card {
-      min-height: 180px;
-      grid-column: span 2;
+      min-height: 0;
+      grid-area: card;
     }
 
     .mock-chart::before,
@@ -724,6 +759,11 @@
       opacity: 0;
       transform: translateY(8px);
       transition: opacity 260ms ease, transform 260ms ease;
+    }
+
+    .sanctum-tip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(10, 17, 40, 0.14);
     }
 
     .sanctum-tip strong {
@@ -771,6 +811,14 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow-soft);
       padding: 40px 34px;
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .alumni-card:hover,
+    .alumni-card:focus-within {
+      transform: translateY(-6px);
+      border-color: rgba(198, 168, 124, 0.62);
+      box-shadow: 0 16px 42px rgba(10, 17, 40, 0.13);
     }
 
     .alumni-card blockquote {
@@ -1080,6 +1128,11 @@
 
       .panel-main {
         grid-template-columns: 1fr;
+        grid-template-rows: 200px 170px 170px;
+        grid-template-areas:
+          "chart"
+          "column"
+          "card";
       }
 
       .mock-card {
@@ -1511,6 +1564,13 @@
     }
 
     function setupReveal() {
+      const revealNodes = document.querySelectorAll(".reveal");
+
+      if (!("IntersectionObserver" in window)) {
+        revealNodes.forEach((node) => node.classList.add("visible"));
+        return;
+      }
+
       const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -1519,7 +1579,11 @@
         });
       }, { threshold: 0.14, rootMargin: "0px 0px -40px 0px" });
 
-      document.querySelectorAll(".reveal").forEach((node) => revealObserver.observe(node));
+      revealNodes.forEach((node) => revealObserver.observe(node));
+
+      window.setTimeout(() => {
+        revealNodes.forEach((node) => node.classList.add("visible"));
+      }, 2400);
     }
 
     function setupNodes() {
