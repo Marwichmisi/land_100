@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updated": "2026-03-22",
+  "updated": "2026-03-23",
   "repo": "https://github.com/Marwichmisi/land_100",
   "baseUrl": "100",
   "landings": [
@@ -17,6 +17,20 @@
       "tech": ["HTML", "CSS", "CSS Animations"],
       "author": "Marwichmisi",
       "date": "2026-03-22"
+    },
+    {
+      "id": 2,
+      "name": "Academia Premium",
+      "desc": "Landing page premium d'etude avec esthetique Ivy League et parcours d'inscription elite",
+      "category": "js-interactions",
+      "level": 4,
+      "folder": "02-academia-premium",
+      "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1200&q=80",
+      "url": "",
+      "tags": ["education", "premium", "revision", "timeline", "inscription"],
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "author": "Marwichmisi",
+      "date": "2026-03-23"
     }
   ]
 }
